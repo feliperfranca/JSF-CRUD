@@ -7,15 +7,25 @@
 
 <f:view contentType="text/html">
 	<h:head>
+	
 		<f:facet name="first">
 			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
 			<title>Adicionar novo usuário</title>
 		</f:facet>
+		
+		<style type="text/css">  
+		    .ui-widget {  
+		        font-size: 12px !important;  
+		    }  
+		</style>
+		
 	</h:head>
 
 	<h:body>
 		<h:form id="form">
-
+			
+			<p:growl id="msg" />
+			
 			<p:commandButton value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
 				action="index" />
 			<p:fieldset legend="Adicionar novo usuário">
@@ -28,17 +38,16 @@
 					<p:inputText value="#{usuarioBean.usuario.nome}" />
 
 					<h:outputText value="Cpf" />
-					<p:inputText value="#{usuarioBean.usuario.cpf}" />
+					<p:inputMask value="#{usuarioBean.usuario.cpf}" mask="999.999.999-99" />
 
 					<h:outputText value="Telefone:" />
-					<p:inputText value="#{usuarioBean.usuario.telefone}" />
+					<p:inputMask value="#{usuarioBean.usuario.telefone}" mask="(99) 9999-9999" />
 
 					<h:outputText value="E-mail" />
 					<p:inputText value="#{usuarioBean.usuario.email}" />
 
 					<p:commandButton value="Salvar" icon="ui-icon-disk"
-						actionListener="#{usuarioBean.inserir}"
-						action="#{usuarioBean.limpar}" update="panel" />
+						action="#{usuarioBean.inserir}" update="panel, msg" />
 
 					<p:commandButton value="Limpar" icon="ui-icon-document"
 						type="reset" />

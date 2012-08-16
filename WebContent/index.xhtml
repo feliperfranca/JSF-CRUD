@@ -7,19 +7,29 @@
 
 <f:view contentType="text/html">
 	<h:head>
+	
 		<f:facet name="first">
 			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
 			<title>CRUD desenvolvido com JSF + MySQL</title>
 		</f:facet>
+		
+		<style type="text/css">  
+		    .ui-widget {  
+		        font-size: 12px !important;  
+		    }  
+		</style>
+		
 	</h:head>
 
 	<h:body>
 		<h:form id="form">
 
+			<p:growl id="msg" />
+			
 			<p:toolbar>
 				<p:toolbarGroup align="left">
 					<p:commandButton value="Novo Usuário" icon="ui-icon-document"
-						action="newUser" />
+						actionListener="#{usuarioBean.limpar}" action="newUser" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
@@ -27,9 +37,7 @@
 				<p:dataTable id="table" value="#{usuarioBean.usuarios}" var="usr"
 					paginator="true" rows="10">
 
-					<f:facet name="header"> 
-                    Lista de Usuários 
-                </f:facet>
+					<f:facet name="header">Lista de Usuários</f:facet>
 
 					<p:column headerText="ID" style="text-align: center">
 						<h:outputText value="#{usr.id}" />
@@ -68,9 +76,7 @@
 
 			<p:dialog header="Detalhes" widgetVar="detailWidget"
 				resizable="false" modal="true">
-						
-				<p:ajax event="close" listener="#{usuarioBean.limpar}"/>
-					
+											
 				<h:panelGrid id="detailDisplay" columns="2" cellpadding="4"
 					style="margin:0 auto;">
 
@@ -99,9 +105,7 @@
 
 			<p:dialog header="Editar" widgetVar="editWidget" resizable="false"
 				modal="true">
-						
-				<p:ajax event="close" listener="#{usuarioBean.limpar}"/>
-					
+											
 				<h:panelGrid id="editDisplay" columns="2" cellpadding="4"
 					style="margin:0 auto;">
 
@@ -112,33 +116,27 @@
 					<p:inputText value="#{usuarioBean.usuario.nome}" />
 
 					<h:outputText value="Cpf" />
-					<p:inputText value="#{usuarioBean.usuario.cpf}" />
+					<p:inputMask value="#{usuarioBean.usuario.cpf}" mask="999.999.999-99" />
 
 					<h:outputText value="Telefone:" />
-					<p:inputText value="#{usuarioBean.usuario.telefone}" />
+					<p:inputMask value="#{usuarioBean.usuario.telefone}" mask="(99) 9999-9999" />
 
 					<h:outputText value="E-mail" />
 					<p:inputText value="#{usuarioBean.usuario.email}" />
 
 					<p:commandButton value="Atualizar" icon="ui-icon-check"
-						actionListener="#{usuarioBean.atualizar}"
-						action="#{usuarioBean.limpar}" oncomplete="editWidget.hide()"
-						update="table" />
+						action="#{usuarioBean.atualizar}" oncomplete="editWidget.hide()"
+						update="table, msg" />
 
 				</h:panelGrid>
 			</p:dialog>
 
 			<p:confirmDialog id="removeDialog" widgetVar="removeWidget" header="Remoção de usuário"
 				message="Deseja realmente apagar o usuário #{usuarioBean.usuario.nome}?"
-				severity="alert" closable="false" >
-						
+				severity="alert" >
 				
-				<p:commandButton value="Sim" icon="ui-icon-check"
-					actionListener="#{usuarioBean.remover}"
-					action="#{usuarioBean.limpar}" oncomplete="removeWidget.hide()"
-					update="table" />
-				<p:commandButton value="Não" icon="ui-icon-close"
-					action="#{usuarioBean.limpar}" oncomplete="removeWidget.hide()" />
+				<p:commandButton value="Sim" icon="ui-icon-check" action="#{usuarioBean.remover}"
+					oncomplete="removeWidget.hide()" update="table, msg" />
 			</p:confirmDialog>
 
 		</h:form>
