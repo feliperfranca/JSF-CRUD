@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<title>CRUD desenvolvido com JSF + MySQL</title>
+		</f:facet>
+	</h:head>
+
+	<h:body>
+		<h:form id="form">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="Novo Usuário" icon="ui-icon-document"
+						action="newUser" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panel>
+				<p:dataTable id="table" value="#{usuarioBean.usuarios}" var="usr"
+					paginator="true" rows="10">
+
+					<f:facet name="header"> 
+                    Lista de Usuários 
+                </f:facet>
+
+					<p:column headerText="ID" style="text-align: center">
+						<h:outputText value="#{usr.id}" />
+					</p:column>
+
+					<p:column headerText="NOME" style="text-align: center">
+						<h:outputText value="#{usr.nome}" />
+					</p:column>
+
+					<p:column headerText="CPF" style="text-align: center">
+						<h:outputText value="#{usr.cpf}" />
+					</p:column>
+
+					<p:column headerText="TELEFONE" style="text-align: center">
+						<h:outputText value="#{usr.telefone}" />
+					</p:column>
+
+					<p:column headerText="E-MAIL" style="text-align: center">
+						<h:outputText value="#{usr.email}" />
+					</p:column>
+
+					<p:column style="text-align: center">
+						<p:commandButton id="detailButton" icon="ui-icon-search" update=":form:detailDisplay" oncomplete="detailWidget.show()">
+							<f:setPropertyActionListener value="#{usr}" target="#{usuarioBean.usuario}" />
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-pencil" />
+						<p:commandButton icon="ui-icon-trash" />
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog header="Detalhes" widgetVar="detailWidget"
+				resizable="false" showEffect="fade" hideEffect="explode"
+				modal="true">
+				<h:panelGrid id="detailDisplay" columns="2" cellpadding="4"
+					style="margin:0 auto;">
+
+					<h:outputText value="Id:" />
+					<h:outputText value="#{usuarioBean.usuario.id}"
+						style="font-weight:bold" />
+
+					<h:outputText value="Nome:" />
+					<h:outputText value="#{usuarioBean.usuario.nome}"
+						style="font-weight:bold" />
+
+					<h:outputText value="Cpf" />
+					<h:outputText value="#{usuarioBean.usuario.cpf}"
+						style="font-weight:bold" />
+
+					<h:outputText value="Telefone:" />
+					<h:outputText value="#{usuarioBean.usuario.telefone}"
+						style="font-weight:bold" />
+
+					<h:outputText value="E-mail" />
+					<h:outputText value="#{usuarioBean.usuario.email}"
+						style="font-weight:bold" />
+
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+	</h:body>
+
+</f:view>
+</html>
+
