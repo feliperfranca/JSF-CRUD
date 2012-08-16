@@ -55,7 +55,9 @@
 						<p:commandButton id="detailButton" icon="ui-icon-search" update=":form:detailDisplay" oncomplete="detailWidget.show()">
 							<f:setPropertyActionListener value="#{usr}" target="#{usuarioBean.usuario}" />
 						</p:commandButton>
-						<p:commandButton icon="ui-icon-pencil" />
+						<p:commandButton icon="ui-icon-pencil" update=":form:editDisplay" oncomplete="editWidget.show()">
+							<f:setPropertyActionListener value="#{usr}" target="#{usuarioBean.usuario}" />
+						</p:commandButton>
 						<p:commandButton icon="ui-icon-trash" />
 					</p:column>
 
@@ -63,8 +65,7 @@
 			</p:panel>
 
 			<p:dialog header="Detalhes" widgetVar="detailWidget"
-				resizable="false" showEffect="fade" hideEffect="explode"
-				modal="true">
+				resizable="false" modal="true">
 				<h:panelGrid id="detailDisplay" columns="2" cellpadding="4"
 					style="margin:0 auto;">
 
@@ -87,6 +88,31 @@
 					<h:outputText value="E-mail" />
 					<h:outputText value="#{usuarioBean.usuario.email}"
 						style="font-weight:bold" />
+
+				</h:panelGrid>
+			</p:dialog>
+
+			<p:dialog header="Editar" widgetVar="editWidget"
+				resizable="false" modal="true">
+				<h:panelGrid id="editDisplay" columns="2" cellpadding="4"
+					style="margin:0 auto;">
+
+					<h:outputText value="Id:" />
+					<p:inputText value="#{usuarioBean.usuario.id}" disabled="true"/>
+
+					<h:outputText value="Nome:" />
+					<p:inputText value="#{usuarioBean.usuario.nome}" />
+
+					<h:outputText value="Cpf" />
+					<p:inputText value="#{usuarioBean.usuario.cpf}" />
+
+					<h:outputText value="Telefone:" />
+					<p:inputText value="#{usuarioBean.usuario.telefone}" />
+
+					<h:outputText value="E-mail" />
+					<p:inputText value="#{usuarioBean.usuario.email}" />
+					
+					<p:commandButton value="Atualizar" icon="ui-icon-check" actionListener="#{usuarioBean.atualizar}" action="#{usuarioBean.limpar}" oncomplete="editWidget.hide()" update="table" />
 
 				</h:panelGrid>
 			</p:dialog>
