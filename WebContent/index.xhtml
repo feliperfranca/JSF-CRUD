@@ -68,6 +68,9 @@
 
 			<p:dialog header="Detalhes" widgetVar="detailWidget"
 				resizable="false" modal="true">
+						
+				<p:ajax event="close" listener="#{usuarioBean.limpar}"/>
+					
 				<h:panelGrid id="detailDisplay" columns="2" cellpadding="4"
 					style="margin:0 auto;">
 
@@ -96,6 +99,9 @@
 
 			<p:dialog header="Editar" widgetVar="editWidget" resizable="false"
 				modal="true">
+						
+				<p:ajax event="close" listener="#{usuarioBean.limpar}"/>
+					
 				<h:panelGrid id="editDisplay" columns="2" cellpadding="4"
 					style="margin:0 auto;">
 
@@ -124,13 +130,15 @@
 
 			<p:confirmDialog id="removeDialog" widgetVar="removeWidget" header="Remoção de usuário"
 				message="Deseja realmente apagar o usuário #{usuarioBean.usuario.nome}?"
-				severity="alert">
+				severity="alert" closable="false" >
+						
+				
 				<p:commandButton value="Sim" icon="ui-icon-check"
 					actionListener="#{usuarioBean.remover}"
 					action="#{usuarioBean.limpar}" oncomplete="removeWidget.hide()"
 					update="table" />
 				<p:commandButton value="Não" icon="ui-icon-close"
-					oncomplete="removeWidget.hide()" />
+					action="#{usuarioBean.limpar}" oncomplete="removeWidget.hide()" />
 			</p:confirmDialog>
 
 		</h:form>

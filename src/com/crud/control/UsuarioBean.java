@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.event.CloseEvent;
+
 import com.crud.dao.UsuarioDAO;
 import com.crud.model.Usuario;
 
@@ -39,6 +41,10 @@ public class UsuarioBean implements Serializable {
 	}
 
 	public void limpar() {
+		usuario = new Usuario();
+	}
+
+	public void limpar(CloseEvent evt) {
 		usuario = new Usuario();
 	}
 
