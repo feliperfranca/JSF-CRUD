@@ -26,10 +26,11 @@
 
 			<p:growl id="msg" />
 			
-			<p:toolbar>
-				<p:toolbarGroup align="left">
-					<p:commandButton value="Novo Usuário" icon="ui-icon-document"
-						actionListener="#{usuarioBean.limpar}" action="newUser" />
+			<p:toolbar style="margin-bottom:30px;" >
+				<p:toolbarGroup align="left" >
+					<p:commandButton value="Novo Usuário" icon="ui-icon-document" action="newUser" >
+						<f:setPropertyActionListener value="#{usuarioBean.nullUser}" target="#{usuarioBean.usuario}" />
+					</p:commandButton>
 				</p:toolbarGroup>
 			</p:toolbar>
 

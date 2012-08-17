@@ -10,8 +10,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-import org.primefaces.event.CloseEvent;
-
 import com.crud.dao.UsuarioDAO;
 import com.crud.model.Usuario;
 
@@ -27,11 +25,10 @@ public class UsuarioBean implements Serializable {
 		usuarios = usuarioDAO.readAll();
 	}
 
-	public void inserir() {
+	public void inserir(ActionEvent evt) {
 		usuarioDAO.create(usuario);
 		usuarios = usuarioDAO.readAll();
 		showMessage("Usuário " + usuario.getNome() + " criado com sucesso!");
-		limpar();
 	}
 
 	public void atualizar() {
@@ -47,10 +44,6 @@ public class UsuarioBean implements Serializable {
 	}
 
 	public void limpar() {
-		usuario = new Usuario();
-	}
-
-	public void limpar(ActionEvent evt) {
 		usuario = new Usuario();
 	}
 	
@@ -73,5 +66,9 @@ public class UsuarioBean implements Serializable {
 
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
+	}
+
+	public Usuario getNullUser() {
+		return new Usuario();
 	}
 }

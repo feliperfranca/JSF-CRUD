@@ -26,8 +26,12 @@
 			
 			<p:growl id="msg" />
 			
-			<p:commandButton value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
-				action="index" />
+			<p:toolbar style="margin-bottom:30px;" >
+				<p:toolbarGroup align="left" >
+					<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w" outcome="index" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
 			<p:fieldset legend="Adicionar novo usuário">
 				<h:panelGrid id="panel" columns="2">
 
@@ -35,10 +39,10 @@
 					<p:inputText value="#{usuarioBean.usuario.id}" disabled="true" />
 
 					<h:outputText value="Nome:" />
-					<p:inputText value="#{usuarioBean.usuario.nome}" />
+					<p:inputText value="#{usuarioBean.usuario.nome}" required="true" requiredMessage="Campo obrigatório. O Nome não pode ser vazio." />
 
 					<h:outputText value="Cpf" />
-					<p:inputMask value="#{usuarioBean.usuario.cpf}" mask="999.999.999-99" />
+					<p:inputMask value="#{usuarioBean.usuario.cpf}" mask="999.999.999-99" required="true" requiredMessage="Campo obrigatório. O CPF não pode ser vazio." />
 
 					<h:outputText value="Telefone:" />
 					<p:inputMask value="#{usuarioBean.usuario.telefone}" mask="(99) 9999-9999" />
@@ -47,7 +51,7 @@
 					<p:inputText value="#{usuarioBean.usuario.email}" />
 
 					<p:commandButton value="Salvar" icon="ui-icon-disk"
-						action="#{usuarioBean.inserir}" update="panel, msg" />
+						actionListener="#{usuarioBean.inserir}" action="#{usuarioBean.limpar}" update="panel, msg" />
 
 					<p:commandButton value="Limpar" icon="ui-icon-document"
 						type="reset" />
