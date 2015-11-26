@@ -70,4 +70,10 @@ public class UsuarioBean implements Serializable {
 	public Usuario getNullUser() {
 		return new Usuario();
 	}
+	
+	public int getProxId() {
+		UsuarioDAO dao = new UsuarioDAO();
+		
+		return dao.contarQtdeUsuariosParaExibicaoDeProxId() + 1;
+	}
 }
