@@ -72,8 +72,6 @@ public class UsuarioBean implements Serializable {
 	}
 	
 	public int getProxId() {
-		UsuarioDAO dao = new UsuarioDAO();
-		
-		return dao.contarQtdeUsuariosParaExibicaoDeProxId() + 1;
+		return usuarioDAO.contarQtdeUsuariosParaExibicaoDeProxId() + 1;
 	}
 }
