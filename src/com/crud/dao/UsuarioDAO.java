@@ -13,7 +13,7 @@ import com.crud.model.Usuario;
 public class UsuarioDAO {
 	private final String URL = "jdbc:mysql://localhost/crud_schema";
 	private final String NOME = "root";
-	private final String SENHA = "admin";
+	private final String SENHA = "root";
 
 	private Connection con;
 	private Statement comando;
@@ -125,6 +125,26 @@ public class UsuarioDAO {
 		} finally {
 			fechar();
 		}
+	}
+	
+	
+	public int contarQtdeUsuariosParaExibicaoDeProxId() {
+		conectar();
+		ResultSet rs;
+		
+		try {
+			rs = comando.executeQuery("select max(id) as qtde from jsf;");
+		
+			while (rs.next()) {
+				return rs.getInt("qtde");
+			} 		
+		} catch (SQLException e) {
+			System.err.println("Erro ao buscar usuários: " + e.getMessage());
+		} finally {
+			fechar();
+		}
+		
+		return 0;
 	}
 
 }

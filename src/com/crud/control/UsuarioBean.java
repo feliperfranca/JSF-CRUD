@@ -16,7 +16,6 @@ import com.crud.model.Usuario;
 @ManagedBean
 @SessionScoped
 public class UsuarioBean implements Serializable {
-	private static final long serialVersionUID = 455659950717243338L;
 	private Usuario usuario = new Usuario();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
@@ -70,5 +69,9 @@ public class UsuarioBean implements Serializable {
 
 	public Usuario getNullUser() {
 		return new Usuario();
+	}
+	
+	public int getProxId() {
+		return usuarioDAO.contarQtdeUsuariosParaExibicaoDeProxId() + 1;
 	}
 }
